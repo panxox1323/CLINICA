@@ -1,0 +1,1 @@
+<a href="{!! route('admin.pedido.index') !!}" class="btn btn-warning"><span class="icon-cancel2"></span> Cancelar</a>

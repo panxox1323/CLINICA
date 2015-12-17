@@ -1,0 +1,17 @@
+{
+  "name": "Oral_Plus",
+  "version": "0.0.1",
+  "description": "Sistema de gestion denatal",
+  "moduleType": [
+    "globals"
+  ],
+  "authors": [
+    "Francisco Inostroza"
+  ],
+  "license": "MIT",
+  "homepage": "oralplus.app:8000",
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "bootstrap-material-design": "~0.3.0"
+  }
+}

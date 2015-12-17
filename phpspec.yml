@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Oral_Plus
+        psr4_prefix: Oral_Plus
+        src_path: app

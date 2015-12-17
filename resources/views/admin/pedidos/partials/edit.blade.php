@@ -1,0 +1,1 @@
+<a href="{{ route('admin.pedido.show', $pedido) }}" class="btn btn-info" title="Ver Detalle" target=""><span class="icon-binoculars"></span> Ver Detalle</a>

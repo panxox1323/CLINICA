@@ -1,0 +1,172 @@
+
+
+.logo {
+  margin-bottom: 10px;
+}
+
+.poner{
+  float: right;
+  text-align: right;
+}
+
+.header {
+  padding: 10px 0;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #AAAAAA;
+}
+
+.logo img {
+  width: 90px;
+  float: left;
+}
+
+.color-letra-factura
+{
+  border-color: #b81900;
+
+}
+
+.color-cabecera-tabla
+{
+  background-color: blue;
+
+}
+
+.tabla-color
+{
+  color: blue;
+  font-size: 20px;
+}
+
+.color-texto
+{
+  color: red;
+}
+
+.color-footer
+{
+  background-color: #808080;
+  height: 70px;
+}
+
+.centrado
+{
+  color: white;
+}
+
+.color-factura
+{
+  color: #6B8CF8;
+}
+
+.fecha{
+  float: right;
+}
+
+.pull-left {
+  float: left !important; }
+
+.pull-right {
+  float: right; }
+
+.titulo{
+  color: blue;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 30px;
+}
+
+.subtitulo{
+  color: #008000;
+}
+
+.saldo{
+  color: red;
+}
+
+thead{
+  border-bottom: 2px solid blue;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 20px;
+}
+
+.text-center{
+  text-align: center;
+  margin-top: -20px;
+}
+
+table tr:nth-child(2n-1) td {
+  background: #F5F5F5;
+}
+
+table th,
+table td {
+  text-align: center;
+}
+
+.alinear{
+  text-align: left;
+}
+
+table th {
+  padding: 5px 20px;
+  color: #5D6975;
+  border-bottom: 1px solid #C1CED9;
+  white-space: nowrap;
+  font-weight: normal;
+}
+
+table .service,
+table .desc {
+  text-align: left;
+}
+
+table td {
+  padding: 20px;
+  text-align: right;
+}
+
+table td.service,
+table td.desc {
+  vertical-align: top;
+}
+
+table td.unit,
+table td.qty,
+table td.total {
+  font-size: 1.2em;
+}
+
+table td.grand {
+  border-top: 1px solid #5D6975;;
+}
+
+#notices .notice {
+  color: #5D6975;
+  font-size: 1.2em;
+}
+
+footer {
+  color: #5D6975;
+  width: 100%;
+  height: 30px;
+  position: absolute;
+  bottom: 0;
+  border-top: 1px solid #C1CED9;
+  padding: 8px 0;
+  text-align: center;
+}
+
+.texto-centrado
+{
+  text-align: center;
+}
+
+
+
+
