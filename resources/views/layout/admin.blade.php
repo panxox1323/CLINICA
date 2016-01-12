@@ -23,8 +23,7 @@
 	{!! Html::script('calendario/jquery-ui.js') !!}
 	{!! Html::script('calendario/jquery.js') !!}
 
-
-	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	{!! Html::script('js/ui.js') !!}
 	{!! Html::script('calendario/jquery.ui.datepicker-es.js') !!}
 		<script>
 		$(function() {
@@ -78,7 +77,23 @@
 	<div class="wrapper">
 
 		@include('admin.partials.header')
-		@include('admin.partials.aside')
+		@if(Auth::user()->type == 'admin')
+
+			@include('admin.partials.aside')
+		@endif
+
+		@if(Auth::user()->type == 'secretaria')
+			@include('admin.partials.asideSecre')
+		@endif
+
+		@if(Auth::user()->type == 'especialista')
+			@include('admin.partials.asideEspecialista')
+		@endif
+
+		@if(Auth::user()->type == 'user')
+			@include('admin.partials.asideUser')
+		@endif
+
 		<div class="content-wrapper ajuste">
 
 			@yield('content')
@@ -160,6 +175,19 @@
 					buttonText: "Seleciona una fecha",
 					//dateFormat: "yy-mm-dd",
 					maxDate: 0,
+
+				}
+		);
+
+		$('#datepicker100').datepicker(
+				{
+					showOn: "button",
+					buttonImage: "../../img/iconos/calendario.png",
+					buttonImageOnly: true,
+					closeText: "Cerrar",
+					buttonText: "Seleciona una fecha",
+					daysOfWeekDisabled: [0, 6],
+
 
 				}
 		);

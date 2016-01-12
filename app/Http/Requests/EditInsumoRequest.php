@@ -24,8 +24,7 @@ class EditInsumoRequest extends Request
     public function rules()
     {
         return [
-            'nombre'            => 'required',
-            'precio_unitario'   => 'required|numeric'
+            'nombre'            => 'required'
         ];
     }
 }

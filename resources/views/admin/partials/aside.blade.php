@@ -25,10 +25,10 @@
             </li>
             <li class="{{ Active::pattern("admin/agendar") }} prueba treeview">
                 <a href="#">
-                    <span class="icon-calendar"> Agendar</span>
+                    <span class="icon-calendar"> Citas</span>
                 </a>
                 <ul class="treeview-menu" style="display: none;">
-                    <li class="icono"><a href="/admin/agendar"><span class="icon-chevron-thin-right"></span> Agendar Cita</a></li>
+                    <li class="icono"><a href="{!! route('admin.agendar.index') !!}"><span class="icon-chevron-thin-right"></span> Agendar Cita</a></li>
                     <li class="icono"><a href="{!! route('horas-agendadas') !!}"><span class="icon-chevron-thin-right"></span> Horas Agendadas</a></li>
                 </ul>
             </li>

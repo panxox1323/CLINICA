@@ -11,7 +11,12 @@
                 <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
                     <div class="row">
                         <p>
-                            <a href="{{ route('admin.configurar.create') }}" role="button" class="btn btn-info"><span class="icon-alarm"></span> Crear Hora</a>
+                            @if(Auth::user()->type == 'admin')
+                                <a href="{{ route('admin.configurar.create') }}" role="button" class="btn btn-info" style="font-weight: bold;"><span class="icon-alarm"></span> Crear Hora</a>
+                            @endif
+                            @if(Auth::user()->type == 'secretaria')
+                                    <a href="{{ route('secretaria.configurar.create') }}" role="button" class="btn btn-info" style="font-weight: bold;"><span class="icon-alarm"></span> Crear Hora</a>
+                            @endif
                         </p>
 
                         <p class="text-primary">Hay {{ $horas->total() }} Horas registradas</p>

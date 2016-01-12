@@ -19,6 +19,12 @@ nav.tm_navbar {
     min-height: 0;
     padding: 0;
 }
+
+.negro
+{
+    font-weight: bold;
+}
+
 nav.tm_navbar li {
     border-right: 1px solid #e8e8e8;
     display: inline-block;

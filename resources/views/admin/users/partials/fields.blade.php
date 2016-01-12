@@ -6,7 +6,13 @@
             {!! Form::label('type', 'Tipo de Usuario', ['class' => '']) !!}
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <strong>{!! Form::select('type', config('opciones.tiposUsuario'), '', ['class' => 'form-control']) !!}</strong>
+            @if(Auth::user()->type == 'admin')
+                <strong>{!! Form::select('type', config('opciones.tiposUsuario'), '', ['class' => 'form-control']) !!}</strong>
+            @endif
+            @if(Auth::user()->type == 'secretaria')
+                <strong>{!! Form::select('type', config('opciones.tiposUsuarioSecre'), '', ['class' => 'form-control']) !!}</strong>
+            @endif
+
         </div>
     </div>
     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 form-group" id="Especialidad" style="display: none">

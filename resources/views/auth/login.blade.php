@@ -77,10 +77,10 @@
 
 								<div class="form-group">
 									<div class="col-md-6 col-md-offset-4">
-										<button type="submit" class="btn btn-primary text-center" style="margin-right: 15px;">
-											Entrar
+										<button type="submit" class="btn btn-primary text-center" style="margin-right: 15px; font-weight: bold">
+											<span class="icon-enter"></span> Entrar
 										</button>
-										<a href="/" class="btn btn-warning"><span class="icon-cancel"></span> Cancelar</a>
+										<a href="/" class="btn btn-warning" style="font-weight: bold;"><span class="icon-cancel"></span> Cancelar</a>
 
 									</div>
 								</div>

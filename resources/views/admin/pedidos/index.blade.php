@@ -12,13 +12,24 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                             <p>
-                                <a href="{{ route('admin.pedido.create') }}" role="button" class="btn btn-info"><span class="icon-plus"></span> Ingresar Pedido</a>
+                                @if(Auth::user()->type == 'admin')
+                                    <a href="{{ route('admin.pedido.create') }}" role="button" class="btn btn-info" style="font-weight: bold;"><span class="icon-plus"></span> Ingresar Pedido</a>
+                                @endif
+                                @if(Auth::user()->type == 'secretaria')
+                                    <a href="{{ route('secretaria.pedido.create') }}" role="button" class="btn btn-info" style="font-weight: bold;"><span class="icon-plus"></span> Ingresar Pedido</a>
+                                @endif
                             </p>
 
                             <p class="text-primary">Hay {{ $pedidos->total() }} Pedidos</p>
                         </div>
                         <div class="col-md-7 col-sm-12 col-xs-12 col-md-offset-2 ">
-                            {!! Form::model(Request::all(),['route' => 'admin.pedido.index', 'method' => 'GET' , 'class' => 'navbar-form navbar-right', 'role' => 'search']) !!}
+                            @if(Auth::user()->type == 'admin')
+                                {!! Form::model(Request::all(),['route' => 'admin.pedido.index', 'method' => 'GET' , 'class' => 'navbar-form navbar-right', 'role' => 'search']) !!}
+                            @endif
+
+                            @if(Auth::user()->type == 'secretaria')
+                                {!! Form::model(Request::all(),['route' => 'secretaria.pedido.index', 'method' => 'GET' , 'class' => 'navbar-form navbar-right', 'role' => 'search']) !!}
+                            @endif
                             <div class="form-group">
 
                                 {!! Form::text('proveedor', null, ['class' => 'form-control', 'placeholder' => 'Nombre Proveedor']) !!}

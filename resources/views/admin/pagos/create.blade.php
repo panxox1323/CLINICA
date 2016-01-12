@@ -7,13 +7,18 @@
             <div class="container">
                 <div class="col-md-11 col-sm-11 col-xs-11 ajuste3">
                     <div class="row">
-                        {!! Form::open(['route' => 'admin.pagar.store', 'method' => 'POST', 'id' => 'form', 'role' => 'form', 'autocomplete' => 'off']) !!}
+                        @if(Auth::user()->type == 'admin')
+                            {!! Form::open(['route' => 'admin.pagar.store', 'method' => 'POST', 'id' => 'form', 'role' => 'form', 'autocomplete' => 'off']) !!}
+                        @endif
+                        @if(Auth::user()->type == 'secretaria')
+                            {!! Form::open(['route' => 'secretaria.pagar.store', 'method' => 'POST', 'id' => 'form', 'role' => 'form', 'autocomplete' => 'off']) !!}
+                        @endif
 
                             @include('admin.pagos.partials.fields')
 
                             <button type="submit" class="btn btn-success btn-crear pull-left"><span class="icon-user-check"></span> Ingresar Pago</button>
                             <div class="pull-right">
-                                @include('admin.users.partials.cancelar')
+                                @include('admin.pagos.partials.cancelar')
                             </div>
 
                         {!! Form::close() !!}

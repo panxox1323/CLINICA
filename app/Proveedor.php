@@ -35,6 +35,7 @@ class Proveedor extends Model
         }
     }
 
+
     public function scopeGiro($query, $giro)
     {
         $types = config('options.tipoGiroProveedor');

@@ -5,6 +5,7 @@ namespace Oral_Plus\Http\Controllers\admin;
 use Bican\Roles\Models\Role;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
@@ -73,7 +74,15 @@ class UsersController extends Controller
 
         $message = $user->first_name . ' ' . $user->last_name . ' fue creado correctamente';
         Session::flash('message', $message);
-        return Redirect::route('admin.users.index');
+        if(Auth::user()->type == 'admin')
+        {
+            return Redirect::route('admin.users.index');
+        }
+        if(Auth::user()->type == 'secretaria')
+        {
+            return Redirect::route('secretaria.users.index');
+        }
+
     }
 
     /**
@@ -126,7 +135,22 @@ class UsersController extends Controller
 
         Session::flash('message', $message);
 
-        return redirect()->route('admin.users.index');
+        if(Auth::user()->type == 'admin')
+        {
+            return redirect()->route('admin.users.index');
+        }
+        if(Auth::user()->type == 'secretaria')
+        {
+            return redirect()->route('secretaria.users.index');
+        }
+        if(Auth::user()->type == 'especialista')
+        {
+            return redirect()->route('especialista.users.index');
+        }
+        if(Auth::user()->type == 'user')
+        {
+            return redirect()->route('user.users.index');
+        }
 
     }
 

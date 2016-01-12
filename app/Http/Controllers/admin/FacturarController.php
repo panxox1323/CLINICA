@@ -5,6 +5,7 @@ namespace Oral_Plus\Http\Controllers\admin;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Oral_Plus\detalle_Compra;
@@ -41,9 +42,8 @@ class FacturarController extends Controller
 
     public function index(Request $request)
     {
-        $array = array('Lista de Proveedores');
-        $proveedores = Proveedor::lists('nombre', 'id')->toArray();
-        array_unshift($array,$proveedores);
+
+        $proveedores   = Proveedor::orderBy('created_at', 'asc')->paginate(8);
 
         $facturas = Factura::name($request->get('name'))->nombre($request->get('proveedor'))->OrderBy('created_at', 'Desc')->paginate(8);
 
@@ -71,7 +71,6 @@ class FacturarController extends Controller
         $fac = new Factura($request->input());
 
 
-
         if($fac->numero_factura > 0)
         {
 
@@ -96,7 +95,7 @@ class FacturarController extends Controller
 
                 else
                 {
-                    $factura = Factura::create($request->all());
+                    $factura     = Factura::create($request->all());
 
                     $facturas = Factura::orderBy('created_at', 'desc')->first();
 
@@ -130,8 +129,15 @@ class FacturarController extends Controller
 
                     $message = 'La factura '.$factura->numero_factura. ' fue ingresada en el sistema';
                     Session::flash('message', $message);
+                    if(Auth::user()->type == 'admin')
+                    {
+                        return redirect()->route('admin.factura.index');
+                    }
+                    if(Auth::user()->type == 'secretaria')
+                    {
+                        return redirect()->route('secretaria.factura.index');
+                    }
 
-                    return redirect()->route('admin.factura.index');
                 }
             }
             else
@@ -171,11 +177,15 @@ class FacturarController extends Controller
                 $message = 'La factura '.$factura->numero_factura. ' fue ingresada en el sistema';
                 Session::flash('message', $message);
 
-                return redirect()->route('admin.factura.index');
+                if(Auth::user()->type == 'admin')
+                {
+                    return redirect()->route('admin.factura.index');
+                }
+                if(Auth::user()->type == 'secretaria')
+                {
+                    return redirect()->route('secretaria.factura.index');
+                }
             }
-
-
-
 
         }
 
@@ -183,7 +193,14 @@ class FacturarController extends Controller
 
             $message = 'El n&uacute;mero de la f&aacute;tura debe ser mayor a 0';
             Session::flash('message', $message);
-            return redirect()->route('admin.factura.index');
+            if(Auth::user()->type == 'admin')
+            {
+                return redirect()->route('admin.factura.index');
+            }
+            if(Auth::user()->type == 'secretaria')
+            {
+                return redirect()->route('secretaria.factura.index');
+            }
 
         }
 

@@ -4,11 +4,10 @@ namespace Oral_Plus\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Oral_Plus\Http\Requests;
 use Oral_Plus\Http\Controllers\Controller;
-use Oral_Plus\Http\Requests\CreateInsumoRequest;
-use Oral_Plus\Http\Requests\EditInsumoRequest;
 use Oral_Plus\Insumo;
 
 class InsumosController extends Controller
@@ -16,11 +15,12 @@ class InsumosController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
     {
         $insumo = Insumo::nombre($request->get('nombre'))->orderBy('id', 'DESC')->paginate(8);
+
 
         return view('admin.insumos.index', compact('insumo'));
     }
@@ -40,13 +40,22 @@ class InsumosController extends Controller
      *
      * @return Response
      */
-    public function store(CreateInsumoRequest $request)
+    public function store(Requests\CreateInsumoRequest $request)
     {
         $insumo = Insumo::create($request->all());
         $message = $insumo->nombre.' fue creado correctamente';
         Session::flash('message', $message);
 
-        return redirect()->route('admin.insumos.index');
+        if(Auth::user()->type == 'admin')
+        {
+            return redirect()->route('admin.insumos.index');
+        }
+
+        if(Auth::user()->type == 'secretaria')
+        {
+            return redirect()->route('secretaria.insumos.index');
+        }
+
     }
 
     /**
@@ -86,7 +95,15 @@ class InsumosController extends Controller
         $message = $insumo->nombre.' fue modificado correctamente';
         Session::flash('message', $message);
 
-        return redirect()->route('admin.insumos.index');
+        if(Auth::user()->type == 'admin')
+        {
+            return redirect()->route('admin.insumos.index');
+        }
+
+        if(Auth::user()->type == 'secretaria')
+        {
+            return redirect()->route('secretaria.insumos.index');
+        }
     }
 
     /**

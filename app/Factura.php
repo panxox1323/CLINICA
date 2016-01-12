@@ -37,13 +37,14 @@ class Factura extends Model
 
     }
 
+
     public function scopeNombre($query, $proveedor)
     {
         if(trim($proveedor) != '' && isset($proveedor))
         {
             return $query->whereHas('proveedor', function($q) use ($proveedor)
             {
-                $q->where('nombre', "LIKE", "%$proveedor%");
+                $q->where('id',  $proveedor);
             });
 
         }

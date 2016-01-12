@@ -7,8 +7,12 @@
         <div class="panel-body">
             <div class="container">
                 <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 ajuste3">
-
-                    {!! Form::open(['route' => 'admin.proveedores.store', 'method' => 'POST', 'autocomplete' => 'off' ]) !!}
+                    @if(Auth::user()->type == 'admin')
+                        {!! Form::open(['route' => 'admin.proveedores.store', 'method' => 'POST', 'autocomplete' => 'off' ]) !!}
+                    @endif
+                    @if(Auth::user()->type == 'secretaria')
+                        {!! Form::open(['route' => 'secretaria.proveedores.store', 'method' => 'POST', 'autocomplete' => 'off' ]) !!}
+                    @endif
                         @include('admin.proveedores.partials.fields')
                         <button type="submit" class="btn btn-success pull-left"><span class="icon-check"></span> Crear Proveedor</button>
 

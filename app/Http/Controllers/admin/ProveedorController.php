@@ -4,6 +4,7 @@ namespace Oral_Plus\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Oral_Plus\Http\Requests;
 use Oral_Plus\Http\Controllers\Controller;
@@ -44,8 +45,15 @@ class ProveedorController extends Controller
         $proveedor = Proveedor::create($request->all());
         $message = $proveedor->nombre. ' fue creado correctamente';
         Session::flash('message', $message);
+        if(Auth::user()->type == 'admin')
+        {
+            return redirect()->route('admin.proveedores.index');
+        }
+        if(Auth::user()->type == 'secretaria')
+        {
+            return redirect()->route('secretaria.proveedores.index');
+        }
 
-        return redirect()->route('admin.proveedores.index');
     }
 
     /**
@@ -84,8 +92,14 @@ class ProveedorController extends Controller
         $proveedor->save();
         $message = $proveedor->nombre. ' fue modificado correctamente';
         Session::flash('message', $message);
-
-        return redirect()->route('admin.proveedores.index');
+        if(Auth::user()->type == 'admin')
+        {
+            return redirect()->route('admin.proveedores.index');
+        }
+        if(Auth::user()->type == 'secretaria')
+        {
+            return redirect()->route('secretaria.proveedores.index');
+        }
     }
 
     /**

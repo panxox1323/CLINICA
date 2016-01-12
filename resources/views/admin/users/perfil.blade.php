@@ -26,8 +26,19 @@
                                 <td>{{ \Carbon\Carbon::parse($users->fecha_nacimiento)->age }} a&ntilde;os</td>
                                 <td>{{ trans($users->type) }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('admin.userPerfil.edit', Auth::user()) }}" class="btn btn-success btn-xs" title="Editar usuario" target=""><span class="icon-pencil2"></span></a>
-                                    <a href="{{ route('admin.users.show', $users) }}" class="btn btn-warning btn-xs" title="Historial cl&iacute;nico" target=""><span class="icon-folder2"></span></a>
+                                    @if(Auth::user()->type == 'admin')
+                                        <a href="{{ route('admin.userPerfil.edit', Auth::user()) }}" class="btn btn-success btn-xs" title="Editar usuario" target=""><span class="icon-pencil2"></span></a>
+                                    @endif
+                                    @if(Auth::user()->type == 'secretaria')
+                                        <a href="{{ route('secretaria.userPerfil.edit', Auth::user()) }}" class="btn btn-success btn-xs" title="Editar usuario" target=""><span class="icon-pencil2"></span></a>
+                                    @endif
+                                    @if(Auth::user()->type == 'especialista')
+                                        <a href="{{ route('especialista.userPerfil.edit', Auth::user()) }}" class="btn btn-success btn-xs" title="Editar usuario" target=""><span class="icon-pencil2"></span></a>
+                                    @endif
+                                    @if(Auth::user()->type == 'user')
+                                        <a href="{{ route('user.userPerfil.edit', Auth::user()) }}" class="btn btn-success btn-xs" title="Editar usuario" target=""><span class="icon-pencil2"></span></a>
+                                    @endif
+
                                 </td>
                             </tr>
                         @endforeach

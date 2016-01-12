@@ -7,13 +7,17 @@
             <div class="container">
                 <div class="col-md-11 col-sm-11 col-xs-11 ajuste3">
                     <div class="row">
-                        {!! Form::open(['route' => 'admin.configurar.store', 'method' => 'POST', 'id' => 'form', 'role' => 'form', 'autocomplete' => 'off']) !!}
+                        @if(Auth::user()->type == 'admin')
+                            {!! Form::open(['route' => 'admin.configurar.store', 'method' => 'POST', 'id' => 'form', 'role' => 'form', 'autocomplete' => 'off']) !!}
+                        @endif
+                        @if(Auth::user()->type == 'secretaria')
+                            {!! Form::open(['route' => 'secretaria.configurar.store', 'method' => 'POST', 'id' => 'form', 'role' => 'form', 'autocomplete' => 'off']) !!}
+                        @endif
 
-                        @include('admin.config.horas.partials.fields')
+
+                            @include('admin.config.horas.partials.fields')
                         <button type="submit" class="btn btn-success btn-crear pull-left"><span class="icon-plus"></span> Crear Hora</button>
-                        <div class="pull-right">
-                            @include('admin.users.partials.cancelar')
-                        </div>
+                            @include('admin.config.horas.partials.cancelar')
 
                         {!! Form::close() !!}
                     </div>

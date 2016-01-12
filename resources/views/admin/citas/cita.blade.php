@@ -8,14 +8,31 @@
         <div class="panel-body">
             <div class="container">
                 <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
-                    {!! Form::open(['route' => 'admin.agendar.store', 'method' => 'POST', 'id' => 'form', 'role' => 'form', 'autocomplete' => 'off']) !!}
+                    @if(Auth::user()->type == 'admin')
+                        {!! Form::open(['route' => 'admin.agendar.store', 'method' => 'POST', 'id' => 'form', 'role' => 'form', 'autocomplete' => 'off']) !!}
+                    @endif
+                    @if(Auth::user()->type == 'secretaria')
+                        {!! Form::open(['route' => 'secretaria.agendar.store', 'method' => 'POST', 'id' => 'form', 'role' => 'form', 'autocomplete' => 'off']) !!}
+                    @endif
+                    @if(Auth::user()->type == 'especialista')
+                        {!! Form::open(['route' => 'especialista.agendar.store', 'method' => 'POST', 'id' => 'form', 'role' => 'form', 'autocomplete' => 'off']) !!}
+                    @endif
                         <div class="row ajuste-seleccione">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                 <select name="id_especialista" id="id_especialista" class="form-control">
                                     <option value="">Selecione Especialista</option>
-                                    @foreach($especialista as $esp)
-                                        <option value="{{ $esp->id }}" >{{ $esp->first_name.' '.$esp->last_name }}</option>
-                                    @endforeach
+                                    @if(Auth::user()->type != 'especialista')
+                                        @foreach($especialista as $esp)
+                                            <option value="{{ $esp->id }}" >{{ $esp->first_name.' '.$esp->last_name }}</option>
+                                        @endforeach
+                                    @endif
+                                    @if(Auth::user()->type == 'especialista')
+                                        @foreach($espe as $es)
+                                            <option value="{{ $es->id }}">{{ $es->first_name.' '.$es->last_name }}</option>
+                                        @endforeach
+                                    @endif
+
+
                                 </select>
                             </div>
 
@@ -23,7 +40,7 @@
                                 <select name="id_usuario" class="form-control">
                                     <option value="">Seleccione Paciente</option>
                                     @foreach($paciente as $pac)
-                                        <option value="{{ $pac->id }}" >{{$pac->run .'--------'. $pac->first_name.' '.$pac->last_name }}</option>
+                                        <option value="{{ $pac->id }}" class="" ><a>{{ $pac->first_name.' '.$pac->last_name.' ' }}</a><p class="color-prueba">({{ $pac->run }})</p></option>
                                     @endforeach
                                 </select>
                             </div>
@@ -54,7 +71,7 @@
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div id="datetimepicker12"></div>
-                                                {!! Form::text('fecha', null, ['class' => ' ', 'id' => 'fechaOculta']) !!}
+                                                {!! Form::text('fecha', null, ['class' => ' ', 'id' => 'fechaOculta', 'style' => 'display:none;']) !!}
                                                 @if($errors->all())
                                                     <div class="" role="alert">
                                                         <strong><p class="porte2 pull-right">{{ $errors->first('fecha') }}</p></strong>
@@ -67,9 +84,7 @@
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
                                 <h4 class="text-center color-subtitulo">Lista de Horarios</h4>
-                                <ul id="lista_horas" class="lista scroll-pool">
-
-                                </ul>
+                                <ul id="lista_horas" class="lista scroll-pool"> </ul>
 
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
@@ -79,7 +94,7 @@
                                         {{--<option value="{{ $disponible->id }}">{{$disponible->hora }}</option>--}}
                                     {{--@endforeach--}}
                                 </select>
-                                <button type="submit" class="btn btn-info btn-block btn-lg "><span class="icon-calendar"></span></span> <strong>Agendar</strong></button>
+                                <button type="submit" class="btn btn-info btn-block btn-lg "><span class="icon-calendar"></span> <strong> Ingresar Cita</strong></button>
                             </div>
                         </div>
 

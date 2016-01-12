@@ -17,9 +17,14 @@ class Pagos extends Model
 
     public function scopeName($query, $name)
     {
-        if(trim($name) != "")
+        if(trim($name) != '' && isset($name))
         {
-            $query->where("user_id",  $name);
+            return $query->whereHas('user', function($q) use ($name)
+            {
+                $q->where('first_name', "LIKE", "%$name%");
+            });
+
         }
+
     }
 }

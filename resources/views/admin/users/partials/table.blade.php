@@ -16,11 +16,21 @@
             <td class="text-center">{{ $user->type }}</td>
             <td class="text-center">$ {{number_format($user->saldo) }}</td>
             <td class="text-center">
-                <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-success btn-xs" title="Editar usuario" target=""><span class="icon-pencil2"></span></a>
-                <a href="{{ route('ver-historial', $user) }}" class="btn btn-warning btn-xs" title="Historial cl&iacute;nico" target=""><span class="icon-folder2"></span></a>
-                <a href="pagos/{{ $user->id }}" class="btn btn-primary btn-xs" title="Pagar Cuenta" target=""><span class="icon-moneybag"></span></a>
-                <a href="" class="btn btn-info btn-xs" title="Agendar Cita"><span class="icon-calendar"></span></a>
-                <a href="{{ route('admin.intervencion2.show', $user) }}" class="btn btn-danger btn-xs" title="Agendar Intervenci&oacute;n"><span class="icon-health"></span></a>
+                @if(Auth::user()->type == 'admin')
+                    <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-success btn-xs" title="Editar usuario" target=""><span class="icon-pencil2"></span></a>
+                    <a href="{{ route('ver-historial', $user) }}" class="btn btn-warning btn-xs" title="Historial cl&iacute;nico" target=""><span class="icon-folder2"></span></a>
+                    <a href="pagos/{{ $user->id }}" class="btn btn-primary btn-xs" title="Pagar Cuenta" target=""><span class="icon-moneybag"></span></a>
+                    <a href="" class="btn btn-info btn-xs" title="Agendar Cita"><span class="icon-calendar"></span></a>
+                    <a href="{{ route('admin.intervencion2.show', $user) }}" class="btn btn-danger btn-xs" title="Agendar Intervenci&oacute;n"><span class="icon-health"></span></a>
+                @endif
+
+                @if(Auth::user()->type == 'secretaria')
+                    <a href="{{ route('secretaria.users.edit', $user) }}" class="btn btn-success btn-xs" title="Editar usuario" target=""><span class="icon-pencil2"></span></a>
+                    <a href="{{ route('secretaria/ver-historial', $user) }}" class="btn btn-warning btn-xs" title="Historial cl&iacute;nico" target=""><span class="icon-folder2"></span></a>
+                    <a href="secretaria/pagos/{{ $user->id }}" class="btn btn-primary btn-xs" title="Pagar Cuenta" target=""><span class="icon-moneybag"></span></a>
+                    <a href="{{ route('secretaria.intervencion2.show', $user) }}" class="btn btn-danger btn-xs" title="Agendar Intervenci&oacute;n"><span class="icon-health"></span></a>
+                @endif
+
             </td>
         </tr>
     @endforeach

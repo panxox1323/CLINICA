@@ -4,6 +4,7 @@ namespace Oral_Plus\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Oral_Plus\Http\Requests;
@@ -20,7 +21,7 @@ class TratamientoController extends Controller
      */
     public function index(Request $request)
     {
-        $tratamientos = Tratamiento::nombre($request->get('name'))->paginate(8);
+        $tratamientos = Tratamiento::nombre($request->get('name'))->orderBy('id', 'desc')->paginate(8);
 
         return view('admin.tratamientos.index', compact('tratamientos'));
     }
@@ -47,7 +48,16 @@ class TratamientoController extends Controller
 
         $message = $tratamiento->nombre  . ' fue creado correctamente';
         Session::flash('message', $message);
-        return Redirect::route('admin.tratamiento.index');
+        if(Auth::user()->type == 'admin')
+        {
+            return Redirect::route('admin.tratamiento.index');
+        }
+
+        if(Auth::user()->type == 'secretaria')
+        {
+            return Redirect::route('secretaria.tratamiento.index');
+        }
+
 
     }
 

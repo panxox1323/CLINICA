@@ -41,7 +41,8 @@
     </div>
     <div>
         <button type="submit" class="btn btn-info"><span class="icon-archive"></span> Guardar</button>
-        <a href="{!! route('admin.factura.index') !!}" class="btn btn-warning btn-md"><span class="icon-cancel-circle"></span> Cancelar</a>
+        @include('admin.factura.partials.cancelar')
+
     </div>
 
 </div>

@@ -4,6 +4,7 @@ namespace Oral_Plus\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
@@ -48,7 +49,15 @@ class EspecialidadController extends Controller
 
         $message = $especialidad->especialidad.' fue creado correctamente';
         Session::flash('message', $message);
-        return Redirect::route('admin.especialidades.index');
+        if(Auth::user()->type == 'admin')
+        {
+            return Redirect::route('admin.especialidades.index');
+        }
+        if(Auth::user()->type == 'secretaria')
+        {
+            return Redirect::route('secretaria.especialidades.index');
+        }
+
     }
 
     /**

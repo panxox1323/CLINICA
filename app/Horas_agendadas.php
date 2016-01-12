@@ -48,4 +48,11 @@ class Horas_agendadas extends Model
         }
     }
 
+    public function scopeFecha($query, $fecha)
+    {
+        if(trim($fecha) != "" && isset($fecha))
+        {
+            $query->where('fecha', $fecha);
+        }
+    }
 }

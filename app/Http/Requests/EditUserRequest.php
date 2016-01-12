@@ -45,8 +45,7 @@ class EditUserRequest extends Request
             'email'              => 'required|unique:users,email,'. $this->route->getParameter('users'),
             'first_name'         => 'required',
             'last_name'          => 'required',
-            'password'           => '',
-            'type'               => 'required||in:user,admin,especialista,secretaria',
+            'type'               => 'required',
             'run'                => 'required|min:8',
             'telefono'           => 'required|numeric|min:7',
             'fecha_nacimiento'   => 'date'

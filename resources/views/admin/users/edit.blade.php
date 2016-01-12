@@ -8,8 +8,18 @@
         <div class="panel-body">
             <div class="container">
                 <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 col-lg-11 ajuste3">
-                    {!! Form::model($user, ['route' => ['admin.users.update', $user], 'method' => 'PUT', 'autocomplete' => 'off']) !!}
-
+                    @if(Auth::user()->type == 'admin')
+                        {!! Form::model($user, ['route' => ['admin.users.update', $user], 'method' => 'PUT', 'autocomplete' => 'off']) !!}
+                    @endif
+                    @if(Auth::user()->type == 'secretaria')
+                        {!! Form::model($user, ['route' => ['secretaria.users.update', $user], 'method' => 'PUT', 'autocomplete' => 'off']) !!}
+                    @endif
+                    @if(Auth::user()->type == 'especialista')
+                        {!! Form::model($user, ['route' => ['especialista.users.update', $user], 'method' => 'PUT', 'autocomplete' => 'off']) !!}
+                    @endif
+                    @if(Auth::user()->type == 'user')
+                        {!! Form::model($user, ['route' => ['user.users.update', $user], 'method' => 'PUT', 'autocomplete' => 'off']) !!}
+                    @endif
                         @include('admin.users.partials.fields')
 
                         <button type="submit" class="btn btn-success pull-left"><span class="icon-pencil2"></span> Editar Usuario</button>

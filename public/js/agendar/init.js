@@ -20,6 +20,7 @@ $(function($) {
             console.log(response);
             $('#lista_horas li').remove().empty();
             $('#select_horas > .dim').remove().empty();
+
             var element = $('#lista_horas');
             $.each(response.horas_todas, function(i, value) {
                 console.log(value);

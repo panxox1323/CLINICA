@@ -20,6 +20,7 @@
                 </select>
             </div>
         </div>
+
         <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6 form-group">
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                 {!! Form::label('id_especialista', 'Especialista', ['class' => '']) !!}
@@ -31,12 +32,21 @@
                     </div>
                 @endif
             </div>
+
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <select name="id_especialista" class="form-control" id="id_especialista">
                     <option value="">Seleccione Especialista</option>
-                    @foreach($especialistas as $especialista)
-                        <option value="{{ $especialista->id }}">{{ $especialista->first_name.' '.$especialista->last_name }}</option>
-                    @endforeach
+                    @if(Auth::user()->type == 'especialista')
+                        @foreach($especialista as $esp)
+                            <option value="{{ $esp->id }}">{{ $esp->first_name.' '.$esp->last_name }}</option>
+                        @endforeach
+                    @endif
+                    @if(Auth::user()->type == 'admin' || Auth::user()->type == 'secretaria')
+                        @foreach($especialistas as $especialista)
+                            <option value=""></option>
+                            <option value="{{ $especialista->id }}">{{ $especialista->first_name.' '.$especialista->last_name }}</option>
+                        @endforeach
+                    @endif
                 </select>
             </div>
         </div>

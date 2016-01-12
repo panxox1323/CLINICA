@@ -24,7 +24,7 @@ class CreateProveedorRequest extends Request
     public function rules()
     {
         return [
-            'nombre'           => 'required',
+            'nombre'           => 'required|unique:proveedors',
             'direccion'        => 'required',
             'telefono'         => 'required|numeric|digits_between:7,12',
             'email'            => 'required|email',

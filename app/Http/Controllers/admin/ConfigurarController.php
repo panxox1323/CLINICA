@@ -4,6 +4,7 @@ namespace Oral_Plus\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use Oral_Plus\Hora;
 use Oral_Plus\Horas;
 use Oral_Plus\Horas_agendadas;
@@ -45,8 +46,14 @@ class ConfigurarController extends Controller
     {
         $hora = Horas::create($request->all());
 
-
-        return redirect()->route('admin.configurar.index');
+        if(Auth::user()->type == 'admin')
+        {
+            return redirect()->route('admin.configurar.index');
+        }
+        if(Auth::user()->type == 'secretaria')
+        {
+            return redirect()->route('secretaria.configurar.index');
+        }
 
     }
 

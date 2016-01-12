@@ -50,7 +50,7 @@ class RedirectIfAuthenticated
                     return redirect()->to('secretaria');
                     break;
 
-                case 'espcialista':
+                case 'especialista':
                     return redirect()->to('especialista');
                     break;
 

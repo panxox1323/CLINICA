@@ -4,6 +4,7 @@ namespace Oral_Plus\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Oral_Plus\DetallePedido;
@@ -49,7 +50,6 @@ class PedidoController extends Controller
     public function store(Requests\CreatePedidoRequest $request)
     {
 
-
         DB::table('pedidos')->insert([
             'id_proveedor' => $request->input('id_proveedor'),
             'fecha'  => \Carbon\Carbon::now()->format('Y-m-d'),
@@ -79,7 +79,16 @@ class PedidoController extends Controller
         $message = 'La Orden de Compra N° '.$pedido->id. ' fue ingresada en el sistema';
         Session::flash('message', $message);
 
-        return redirect()->route('admin.pedido.index');
+        if(Auth::user()->type == 'admin')
+        {
+            return redirect()->route('admin.pedido.index');
+        }
+
+        if(Auth::user()->type == 'secretaria')
+        {
+            return redirect()->route('secretaria.pedido.index');
+        }
+
     }
 
     /**

@@ -12,22 +12,42 @@
                         <div class="row">
                             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                                 <p>
-                                    <a href="/admin/agendar" role="button" class="btn btn-info"><span class="icon-alarm"></span> Ingresar Cita</a>
+                                    @if(Auth::user()->type == 'admin')
+                                        <a href="/admin/agendar" role="button" class="btn btn-info"><span class="icon-alarm"></span> Ingresar Cita</a>
+                                    @endif
+                                    @if(Auth::user()->type == 'secretaria')
+                                        <a href="/secretaria/agendar" role="button" class="btn btn-info"><span class="icon-alarm"></span> Ingresar Cita</a>
+                                    @endif
+                                    @if(Auth::user()->type == 'especialista')
+                                       <a href="/especialista/agendar" role="button" class="btn btn-info"><span class="icon-alarm"></span> Ingresar Cita</a>
+                                    @endif
                                 </p>
 
                                 <p class="text-primary">Hay {{ $horas->total() }} Registros</p>
                             </div>
                             <div class="col-md-7 col-sm-12 col-xs-12 col-md-offset-2 ">
-                                {!! Form::model(Request::all(),['route' => 'horas-agendadas', 'method' => 'GET' , 'class' => 'navbar-form navbar-right', 'role' => 'search']) !!}
-                                    <div class="form-group">
+                                @if(Auth::user()->type == 'admin')
+                                    {!! Form::model(Request::all(),['route' => 'horas-agendadas', 'method' => 'GET' , 'class' => 'navbar-form navbar-right', 'role' => 'search']) !!}
+                                        <div class="form-group">
 
-                                        {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Nombre de usuario']) !!}
-                                        <strong><span class="icon-circle-with-plus"></span></strong>
+                                            {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Nombre de usuario']) !!}
+                                            <strong><span class="icon-circle-with-plus"></span></strong>
 
-                                    </div>
+                                        </div>
 
-                                    <button type="submit" class="btn btn-info"><span class="icon-magnifier"></span></span> <strong>Buscar</strong></button>
-                                {!! Form::close() !!}
+                                        <button type="submit" class="btn btn-info"><span class="icon-magnifier"></span> <strong>Buscar</strong></button>
+                                    {!! Form::close() !!}
+                                @endif
+
+                                @if(Auth::user()->type == 'secretaria')
+                                    {!! Form::model(Request::all(),['route' => 'secretaria/horas-agendadas', 'method' => 'GET' , 'class' => 'navbar-form navbar-right', 'role' => 'search']) !!}
+                                        <div class="form-group">
+                                            {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Nombre de usuario']) !!}
+                                            <strong><span class="icon-circle-with-plus"></span></strong>
+                                        </div>
+                                        <button type="submit" class="btn btn-info"><span class="icon-magnifier"></span> <strong>Buscar</strong></button>
+                                    {!! Form::close() !!}
+                                @endif
                             </div>
                         </div>
 

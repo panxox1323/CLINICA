@@ -5,7 +5,10 @@
         <th class="text-center">Cantidad</th>
         <th class="text-center">Precio</th>
         <th class="text-center">SubTotal</th>
-        <th class="text-center">Acciones</th>
+        @if(Auth::user()->type == 'admin')
+            <th class="text-center">Acciones</th>
+        @endif
+
     </tr>
     @foreach($detalles as $detalle)
         <tr data-id="{{ $detalle->id }}">
@@ -16,12 +19,11 @@
             <td class="text-center">${{ number_format($detalle->precio) }}</td>
 
             <td class="text-center color-2">${{ number_format($detalle->precio * $detalle->cantidad) }}</td>
-
-            <td class="text-center">
-                @if (Auth::user()->type == 'admin')
+            @if (Auth::user()->type == 'admin')
+                <td class="text-center">
                     <a href="{{ route('admin.factura.edit', $detalle) }}" class="btn btn-success btn-xs" title="Editar Detalle" target=""><span class="icon-pencil2"></span></a>
-                @endif
-            </td>
+                </td>
+            @endif
         </tr>
     @endforeach
 </table>

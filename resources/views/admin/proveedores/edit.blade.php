@@ -6,12 +6,15 @@
         <div class="panel-body">
             <div class="container">
                 <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 ajuste3">
-                    {!! Form::model($proveedor, ['route' => ['admin.proveedores.update', $proveedor], 'method' => 'PUT' ]) !!}
+                    @if(Auth::user()->type == 'admin')
+                        {!! Form::model($proveedor, ['route' => ['admin.proveedores.update', $proveedor], 'method' => 'PUT' ]) !!}
+                    @endif
+                    @if(Auth::user()->type == 'secretaria')
+                        {!! Form::model($proveedor, ['route' => ['secretaria.proveedores.update', $proveedor], 'method' => 'PUT' ]) !!}
+                    @endif
 
                         @include('admin.proveedores.partials.fields')
-
-
-
+                        <button type="submit" class="btn btn-success pull-left"><span class="icon-pencil2"></span> Editar Proveedor</button>
                         <div class="pull-right">
                             @include('admin.proveedores.partials.cancelar')
                         </div>

@@ -30,5 +30,9 @@ class Kernel extends HttpKernel
         'auth' => \Oral_Plus\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \Oral_Plus\Http\Middleware\RedirectIfAuthenticated::class,
+        'IsAdmin' => \Oral_Plus\Http\Middleware\IsAdmin::class,
+        'IsSecretaria' => \Oral_Plus\Http\Middleware\IsSecretaria::class,
+        'IsUser' => \Oral_Plus\Http\Middleware\IsUsuario::class,
+        'IsEspecialista' => \Oral_Plus\Http\Middleware\IsEspecialista::class
     ];
 }

@@ -3,7 +3,12 @@
 @section('css')
     {!! Html::style('css/stylePDF.css')  !!}
 @endsection
-
+@section('titulo')
+    <title>Usuarios con saldo en el sistema</title>
+@endsection
+@section('icono')
+    <link rel="shortcut icon" href="img/favicon.ico">
+@endsection
 @section('content')
     <div class="logo">
         <div class="pull-left">

@@ -19,7 +19,7 @@
 
                 <a href="{{ route('admin.pedido.edit', $pedido) }}" class="btn btn-success btn-xs" title="Editar usuario" target=""><span class="icon-pencil2"></span></a>
                 <a href="{{ route('admin.pedido.show', $pedido) }}" class="btn btn-info btn-xs" title="Ver Detalle del Pedido" target=""><span class="icon-binoculars"></span></a>
-                <a href="{{ route('pdfPedido', $pedido->id) }}" class="btn btn-warning btn-xs" title="Ver en PDF" target="_blank"><span class="icon-binoculars"></span></a>
+                <a href="{{ route('pdfPedido', $pedido->id) }}" class="btn btn-warning btn-xs" title="Ver en PDF" target="_blank"><span class="icon-file-pdf"></span></a>
 
             </td>
         </tr>

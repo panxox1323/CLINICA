@@ -27,9 +27,15 @@ return array(
 	'tiposUsuario' => [
 		''           => 'Seleccione un tipo de usuario',
 		'1'          => 'Admin',
-		'2'          => 'Secretar&iacute;a',
+		'2'          => 'Usuario',
 		'3'          => 'Especialista',
-		'4'          => 'Usuario'
+		'4'          => 'Secretaría'
+	],
+	'tiposUsuarioSecre' => [
+		''           => 'Seleccione un tipo de usuario',
+		'2'          => 'Usuario',
+		'3'          => 'Especialista',
+		'4'          => 'Secretaría'
 	],
 
 	'estadoUsuario' => [

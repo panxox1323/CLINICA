@@ -2,16 +2,20 @@
 
 namespace Oral_Plus\Http\Controllers\admin;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 use Oral_Plus\Detalle_diagnostico;
 use Oral_Plus\Diagnostico;
+use Oral_Plus\Especialista;
 use Oral_Plus\Http\Requests;
 use Oral_Plus\Http\Controllers\Controller;
+use Oral_Plus\Proveedor;
 use Oral_Plus\Tratamiento;
 use Oral_Plus\User;
 
@@ -24,9 +28,11 @@ class DiagnosticoController extends Controller
      */
     public function index(Request $requests)
     {
-        $diagnosticos = Diagnostico::name($requests->get('id_usuario'))->orderBy('created_at', 'asc')->paginate(8);
+        $diagnosticos   = Diagnostico::name($requests->get('name'))->especialista($requests->get('id_especialista'))->orderBy('id', 'desc')->paginate(8);
+        $especialistas  = User::where('type', 'especialista')->orderby('first_name', 'asc')->get(['first_name', 'last_name','id']);
 
-        return view('admin.diagnostico.index', compact('diagnosticos'));
+
+        return view('admin.diagnostico.index', compact('diagnosticos', 'especialistas'));
     }
 
     /**
@@ -39,8 +45,10 @@ class DiagnosticoController extends Controller
         $pacientes     = User::where('type','!=', 'Especialista')->get(['first_name', 'last_name', 'id']);
         $especialistas = User::where('type', 'Especialista')->get(['first_name', 'last_name', 'id']);
         $tratamientos  = Tratamiento::all();
+        $id = Auth::user()->id;
+        $especialista   = User::where('type', 'especialista')->where('id', $id)->get();
 
-        return view('admin.diagnostico.create', compact('pacientes', 'especialistas', 'tratamientos'));
+        return view('admin.diagnostico.create', compact('pacientes', 'especialistas', 'tratamientos', 'especialista'));
     }
 
     /**
@@ -68,8 +76,18 @@ class DiagnosticoController extends Controller
 
         $message = 'El Diagnostico '.$diagnosticos->id. ' fue ingresada en el sistema';
         Session::flash('message', $message);
-
-        return redirect()->route('admin.diagnostico.index');
+        if(Auth::user()->type == 'admin')
+        {
+            return redirect()->route('admin.diagnostico.index');
+        }
+        if(Auth::user()->type == 'secretaria')
+        {
+            return redirect()->route('secretaria.diagnostico.index');
+        }
+        if(Auth::user()->type == 'especialista')
+        {
+            return redirect()->route('especialista.diagnostico.index');
+        }
     }
 
     /**
@@ -176,6 +194,22 @@ class DiagnosticoController extends Controller
         //return $pdf->download('usuarios.pdf');
         return $pdf->stream('invoice');
 
+    }
+
+
+    public function paciente($id)
+    {
+        $diagnosticos = Diagnostico::Where('id_usuario', $id)->orderBy('fecha', 'asc')->paginate(8);
+
+        return view('admin.diagnostico.paciente', compact('diagnosticos'));
+    }
+
+    public function misdiagnosticos()
+    {
+        $id = Auth::user()->id;
+        $misDiagnosticos = Diagnostico::where('id_especialista', $id)->orderBy('id', 'asc')->paginate(8);
+
+        return view('admin.diagnostico.misDiagnosticos', compact('misDiagnosticos', 'especialistas'));
     }
 
 

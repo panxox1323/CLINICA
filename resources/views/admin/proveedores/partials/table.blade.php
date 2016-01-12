@@ -14,11 +14,11 @@
             <td class="text-center">{{ $proveedor->ciudad }}</td>
             <td class="text-center">
                 @if(Auth::user()->type == 'admin')
-
                     <a href="{{ route('admin.proveedores.edit', $proveedor) }}" class="btn btn-success btn-xs"><span class="icon-pencil2" title="Editar"></span></a>
-
                 @endif
-
+                @if(Auth::user()->type == 'secretaria')
+                    <a href="{{ route('secretaria.proveedores.edit', $proveedor) }}" class="btn btn-success btn-xs"><span class="icon-pencil2" title="Editar"></span></a>
+                @endif
             </td>
         </tr>
     @endforeach

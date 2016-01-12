@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Oral_Plus\Consulta;
@@ -30,9 +31,10 @@ class AgendarController extends Controller
 
         $especialista = User::where('type', 'Especialista')->get(['first_name', 'last_name', 'id']);
         $paciente     = User::where('type', '!=', 'Especialista')->get(['first_name', 'last_name', 'id', 'run']);
+        $id = Auth::user()->id;
+        $espe = User::where('id', $id)->get();
 
-
-        return view('admin.citas.cita', compact('especialista', 'paciente'));
+        return view('admin.citas.cita', compact('especialista', 'paciente', 'espe'));
     }
 
     /**
@@ -237,5 +239,20 @@ class AgendarController extends Controller
         return view('admin.citas.edit', compact('listado', 'especialista', 'paciente', 'disponibles'));
     }
 
+    public function horasUser($id)
+    {
+        $horas = Horas_agendadas::where('id_usuario', $id)->orderBy('fecha', 'asc')->paginate(8);
+
+        return view('admin.citas.citasUser', compact('horas'));
+    }
+
+    public function ver_horas_especialista(Request $request)
+    {
+        $fecha = Carbon::now()->format('Y-m-d');
+        $id    = Auth::user()->id;
+        $horas = Horas_agendadas::fecha($request->get('fecha'))->where('id_especialista', $id)->where('fecha', '>=', $fecha)->paginate(8);
+
+        return view('admin.citas.citas-especialista', compact('horas'));
+    }
 
 }

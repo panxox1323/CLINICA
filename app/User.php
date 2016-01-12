@@ -135,4 +135,6 @@ class User extends Model implements AuthenticatableContract,
         $query->where('id', $numero );
     }
 
+
+
 }

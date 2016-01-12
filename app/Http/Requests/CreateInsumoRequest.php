@@ -24,7 +24,7 @@ class CreateInsumoRequest extends Request
     public function rules()
     {
         return [
-            'nombre'            => 'required|unique:insumos',
+            'nombre' => 'required|unique:insumos',
 
         ];
     }
