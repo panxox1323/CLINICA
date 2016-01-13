@@ -56,4 +56,12 @@ class Horas_agendadas extends Model
         }
     }
 
+    public function scopeEspecialista($query, $especialista)
+    {
+        if(trim($especialista) != "" && isset($especialista))
+        {
+            $query->where('id_especialista', $especialista);
+        }
+    }
+
 }

@@ -71,6 +71,18 @@ Route::group(['prefix' => 'especialista', 'middleware' => ['auth'], 'namespace' 
         'uses'  => 'DiagnosticoController@generarPdf'
     ]);
 
+    Route::get('reporte-citas',
+        [
+            'as'   => 'especialista/reporte-citas',
+            'uses' => 'pagosController@reportePagos'
+        ]);
+
+    Route::get('citasEfectuadas',
+        [
+            'as'    => 'especialista/citasEfectuadas',
+            'uses'  => 'AgendarController@citasEfectuadas'
+        ]);
+
     Route::resource('diagnostico', 'DiagnosticoController');
 
 
@@ -151,6 +163,12 @@ Route::group(['prefix' => 'secretaria', 'middleware' => ['auth', 'IsSecretaria']
         'as'    => 'secretaria/reportePago',
         'uses'  => 'PagarController@reporte'
     ]);
+
+    Route::get('citasEfectuadas',
+        [
+            'as'    => 'secretaria/citasEfectuadas',
+            'uses'  => 'AgendarController@citasEfectuadas'
+        ]);
 
     Route::get('pagosEfectuados', [
         'as'    => 'secretaria/pagosEfectuados',
@@ -246,6 +264,12 @@ Route::group(['prefix' => 'secretaria', 'middleware' => ['auth', 'IsSecretaria']
             'uses' => 'pagosController@reportePagos'
         ]);
 
+    Route::get('reporte-citas',
+        [
+            'as'   => 'secretaria/reporte-citas',
+            'uses' => 'pagosController@reportePagos'
+        ]);
+
     Route::post('/pagado/{id}', [
 
         'as'      => 'pagado',
@@ -288,6 +312,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'IsAdmin'], 'namespa
             'uses' => 'pagosController@reportePagos'
         ]);
 
+
+
     Route::get('reportePago/{id}',[
         'as'    => 'admin/reportePago',
         'uses'  => 'PagarController@reporte'
@@ -306,10 +332,22 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'IsAdmin'], 'namespa
         'uses'  => 'DiagnosticoController@cambiarEstado'
     ]);
 
+    Route::get('citasEfectuadas',
+        [
+            'as'    => 'admin/citasEfectuadas',
+            'uses'  => 'AgendarController@citasEfectuadas'
+        ]);
+
     Route::get('pagosEfectuados', [
         'as'    => 'admin/pagosEfectuados',
         'uses'  => 'pagosController@pagosEfectuados'
     ]);
+
+    Route::get('reporte-citas',
+        [
+            'as'   => 'admin/reporte-citas',
+            'uses' => 'AgendarController@reporteCitas'
+        ]);
 
 
 

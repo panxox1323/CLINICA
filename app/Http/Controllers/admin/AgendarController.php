@@ -6,9 +6,11 @@ use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\View;
 use Oral_Plus\Consulta;
 use Oral_Plus\Hora;
 use Oral_Plus\Horas_agendadas as HorasAgendadas;
@@ -255,6 +257,30 @@ class AgendarController extends Controller
         $horas = Horas_agendadas::fecha($request->get('fecha'))->where('id_especialista', $id)->where('fecha', '>=', $fecha)->paginate(8);
 
         return view('admin.citas.citas-especialista', compact('horas'));
+    }
+
+    public function citasEfectuadas(Request $request)
+    {
+        $especialistas = User::where('type', 'especialista')->orderBy('first_name', 'asc')->get(['first_name', 'last_name', 'id']);
+        $horas  = Horas_agendadas::especialista($request->get('especialista'))->fecha($request->get('fecha'))->orderBy('id', 'desc')->paginate(8);
+
+        return view('admin.citas.citasEfectuadas', compact('especialistas', 'horas'));
+    }
+
+    public function reporteCitas(Request $request)
+    {
+        $fecha = $request->fecha;
+        $id = $request->especialista;
+        $especialista = User::where('id', $id)->first();
+
+        $citas    = Horas_agendadas::where('fecha', $fecha)->where('id_especialista', $id)->get();
+
+
+        $view =  View::make('pdf.reporteCitas.index', compact('invoice', 'fecha', 'citas'))->with('especialista', $especialista)->render();
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        //return $pdf->download('usuarios.pdf');
+        return $pdf->stream('invoice');
     }
 
 }

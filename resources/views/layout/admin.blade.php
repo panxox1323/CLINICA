@@ -241,6 +241,8 @@
 
 
 
+
+
 		function soloNumeros(e) {
 
 			e = (e) ? e : window.event
@@ -260,6 +262,16 @@
 			return true
 
 		}
+
+	</script>
+	<script type="text/javascript">
+		$(function () {
+			$('#especialista').change({
+
+
+			});
+
+		});
 
 	</script>
 
