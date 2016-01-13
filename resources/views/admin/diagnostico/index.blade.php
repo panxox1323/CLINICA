@@ -41,14 +41,15 @@
                                 @endif
 
                                 <div class="form-group">
-                                    {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Nombre de usuario']) !!}
-                                    <strong><span class="icon-circle-with-plus"></span></strong>
-                                    <select name="id_especialista" class="form-control">
-                                        <option value="">Selecione Especialista</option>
-                                        @foreach($especialistas as $esp)
-                                            <option value="{{ $esp->id }}" >{{ $esp->first_name.' '.$esp->last_name }}</option>
+
+                                    <select name="paciente" class="form-control">
+                                        <option value="">Selecione Paciente</option>
+                                        @foreach($pacientes as $paciente)
+                                            <option value="{{ $paciente->id }}" >{{ $paciente->first_name.' '.$paciente->last_name }}</option>
                                         @endforeach
                                     </select>
+                                    <strong><span class="icon-circle-with-plus"></span></strong>
+                                    <input type="date" name="fecha" id="datepicker100">
                                     <button type="submit" class="btn btn-info"><span class="icon-magnifier"></span><strong>Buscar</strong></button>
                                     {!! Form::close() !!}
                                 </div>

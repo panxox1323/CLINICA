@@ -7,7 +7,7 @@
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             @if(Auth::user()->type == 'admin')
-                <strong>{!! Form::select('type', config('opciones.tiposUsuario'), '', ['class' => 'form-control']) !!}</strong>
+                <strong>{!! Form::select('type', config('opciones.tiposUsuario'), ['class' => 'form-control', 'selected' => 'selected']) !!}</strong>
             @endif
             @if(Auth::user()->type == 'secretaria')
                 <strong>{!! Form::select('type', config('opciones.tiposUsuarioSecre'), '', ['class' => 'form-control']) !!}</strong>

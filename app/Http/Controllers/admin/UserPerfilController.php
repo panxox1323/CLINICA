@@ -15,7 +15,7 @@ class UserPerfilController extends Controller
     public function index(Request $request)
     {
         $id = Auth::user()->id;
-        $user = User::all()->where('id', $id);
+        $user = User::where('id', $id)->get();
         return view('admin.users.perfil', compact('user'));
     }
 
@@ -73,6 +73,7 @@ class UserPerfilController extends Controller
      */
     public function update(EditUserPerfilRequest $request, $id)
     {
+        dd($id);
         $user = User::findOrFail($id);
         $user->fill($request->all());
         $user->save();

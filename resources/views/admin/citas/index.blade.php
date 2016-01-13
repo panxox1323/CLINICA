@@ -28,26 +28,21 @@
                             <div class="col-md-7 col-sm-12 col-xs-12 col-md-offset-2 ">
                                 @if(Auth::user()->type == 'admin')
                                     {!! Form::model(Request::all(),['route' => 'horas-agendadas', 'method' => 'GET' , 'class' => 'navbar-form navbar-right', 'role' => 'search']) !!}
-                                        <div class="form-group">
-
-                                            {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Nombre de usuario']) !!}
-                                            <strong><span class="icon-circle-with-plus"></span></strong>
-
-                                        </div>
-
-                                        <button type="submit" class="btn btn-info"><span class="icon-magnifier"></span> <strong>Buscar</strong></button>
-                                    {!! Form::close() !!}
                                 @endif
-
                                 @if(Auth::user()->type == 'secretaria')
                                     {!! Form::model(Request::all(),['route' => 'secretaria/horas-agendadas', 'method' => 'GET' , 'class' => 'navbar-form navbar-right', 'role' => 'search']) !!}
+                                @endif
                                         <div class="form-group">
+
                                             {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Nombre de usuario']) !!}
                                             <strong><span class="icon-circle-with-plus"></span></strong>
+                                            <input type="date" name="fecha" id="datepicker100">
+
                                         </div>
+
                                         <button type="submit" class="btn btn-info"><span class="icon-magnifier"></span> <strong>Buscar</strong></button>
                                     {!! Form::close() !!}
-                                @endif
+
                             </div>
                         </div>
 

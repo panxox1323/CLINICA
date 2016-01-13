@@ -23,9 +23,10 @@ class PedidoController extends Controller
      */
     public function index(Request $request)
     {
-        $pedidos = Pedidos::ObtenerProveedor($request->get('proveedor'))->orderBy('id', 'desc')->paginate(8);
+        $pedidos = Pedidos::consulta($request->get('proveedor'))->fecha($request->get('fecha'))->orderBy('id', 'desc')->paginate(8);
+        $proveedores = Proveedor::all();
 
-        return view('admin.pedidos.index',compact('pedidos'));
+        return view('admin.pedidos.index',compact('pedidos', 'proveedores'));
     }
 
     /**

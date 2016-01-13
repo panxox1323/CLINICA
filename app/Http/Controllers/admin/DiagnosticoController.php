@@ -28,11 +28,11 @@ class DiagnosticoController extends Controller
      */
     public function index(Request $requests)
     {
-        $diagnosticos   = Diagnostico::name($requests->get('name'))->especialista($requests->get('id_especialista'))->orderBy('id', 'desc')->paginate(8);
+        $diagnosticos   = Diagnostico::paciente($requests->get('paciente'))->fecha($requests->get('fecha'))->orderBy('id', 'desc')->paginate(8);
         $especialistas  = User::where('type', 'especialista')->orderby('first_name', 'asc')->get(['first_name', 'last_name','id']);
+        $pacientes      = User::where('type', '!=', 'especialista')->orderBy('first_name', 'asc')->get(['first_name', 'last_name', 'id']);
 
-
-        return view('admin.diagnostico.index', compact('diagnosticos', 'especialistas'));
+        return view('admin.diagnostico.index', compact('diagnosticos', 'especialistas', 'pacientes'));
     }
 
     /**
@@ -197,11 +197,14 @@ class DiagnosticoController extends Controller
     }
 
 
-    public function paciente($id)
+    public function paciente(Request $request)
     {
-        $diagnosticos = Diagnostico::Where('id_usuario', $id)->orderBy('fecha', 'asc')->paginate(8);
+        $id = Auth::user()->id;
+        $diagnosticos = Diagnostico::especialista($request->get('especialista'))->fecha($request->get('fecha'))->Where('id_usuario', $id)->orderBy('fecha', 'asc')->paginate(8);
+        $especialistas = User::where('type', 'especialista')->orderBy('first_name', 'asc')->get(['first_name', 'last_name', 'id']);
 
-        return view('admin.diagnostico.paciente', compact('diagnosticos'));
+
+        return view('admin.diagnostico.paciente', compact('diagnosticos', 'especialistas'));
     }
 
     public function misdiagnosticos()

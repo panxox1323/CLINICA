@@ -20,9 +20,9 @@
 
                             {!! Form::model(Request::all(),['route' => 'user/pagosUser', 'method' => 'GET' , 'class' => 'navbar-form navbar-right', 'role' => 'search']) !!}
                                 <div class="form-group">
-                                    {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Nombre de usuario']) !!}
-                                    <strong><span class="icon-circle-with-plus"></span></strong>
-                                    {!! Form::select('type', config('opciones.types'), null, ['class' => 'form-control']) !!}
+
+                                    <input type="date" name="fecha" id="datepicker100">
+
                                 </div>
 
 

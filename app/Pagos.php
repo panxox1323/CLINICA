@@ -15,16 +15,24 @@ class Pagos extends Model
         return $this->belongsTo('Oral_Plus\User','user_id', 'id');
     }
 
-    public function scopeName($query, $name)
+    public function scopeFecha($query, $fecha)
     {
-        if(trim($name) != '' && isset($name))
+        if(trim($fecha) != '' && isset($fecha))
         {
-            return $query->whereHas('user', function($q) use ($name)
-            {
-                $q->where('first_name', "LIKE", "%$name%");
-            });
-
+            $query->where('fecha', $fecha);
         }
 
+    }
+
+
+    public function scopePaciente($query, $paciente)
+    {
+        if(trim($paciente) != "" && isset($paciente))
+        {
+            return $query->whereHas('user', function ($q) use ($paciente)
+            {
+                $q->where('id', $paciente);
+            });
+        }
     }
 }

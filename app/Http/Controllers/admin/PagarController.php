@@ -27,9 +27,10 @@ class PagarController extends Controller
      */
     public function index(Request $request)
     {
-        $pagos = Pagos::name($request->get('name'))->orderBy('created_at', 'desc')->paginate(8);
+        $pagos = Pagos::fecha($request->get('fecha'))->paciente($request->get('paciente'))->orderBy('created_at', 'desc')->paginate(8);
+        $pacientes = User::where('type', '!=', 'especialista')->get(['first_name', 'last_name', 'id']);
 
-        return view('admin.pagos.index', compact('pagos'));
+        return view('admin.pagos.index', compact('pagos', 'pacientes'));
     }
 
     /**

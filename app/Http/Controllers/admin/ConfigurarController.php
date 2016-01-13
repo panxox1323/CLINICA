@@ -5,6 +5,7 @@ namespace Oral_Plus\Http\Controllers\admin;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Oral_Plus\Hora;
 use Oral_Plus\Horas;
 use Oral_Plus\Horas_agendadas;
@@ -76,7 +77,8 @@ class ConfigurarController extends Controller
      */
     public function edit($id)
     {
-        //
+        $config = Horas::findOrFail($id);
+        return view('admin.config.horas.edit', compact('config'));
     }
 
     /**

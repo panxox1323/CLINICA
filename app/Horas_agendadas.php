@@ -55,4 +55,5 @@ class Horas_agendadas extends Model
             $query->where('fecha', $fecha);
         }
     }
+
 }

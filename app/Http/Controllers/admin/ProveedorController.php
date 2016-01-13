@@ -85,7 +85,7 @@ class ProveedorController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(CreateProveedorRequest $request, $id)
+    public function update(Requests\EditProveedorRequest $request, $id)
     {
         $proveedor = Proveedor::findOrFail($id);
         $proveedor->fill($request->all());

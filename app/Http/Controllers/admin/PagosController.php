@@ -5,9 +5,12 @@ namespace Oral_Plus\Http\Controllers\admin;
 use DB;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\View;
 use Oral_Plus\Consulta;
+use Oral_Plus\Factura;
 use Oral_Plus\Horas_agendadas;
 use Oral_Plus\Http\Requests;
 use Oral_Plus\Http\Controllers\Controller;
@@ -143,5 +146,31 @@ class PagosController extends Controller
 
 
         }
+    }
+
+    public function pagosEfectuados(Request $request)
+    {
+        $pagos = Pagos::fecha($request->get('fecha'))->orderBy('id', 'desc')->paginate(12);
+
+        return view('admin.pagos.reportePagos', compact('pagos'));
+    }
+
+    public function reportePagos(Requests\PdfPagosRequest $request)
+    {
+        $consulta = new Factura($request->input());
+        $fecha    = $consulta->fecha;
+        $pagos    = Pagos::where('fecha', $fecha)->get();
+        $suma = 0;
+        foreach ($pagos as $pago)
+        {
+            $suma = $suma + $pago->monto;
+        }
+
+
+        $view =  View::make('pdf.reportePagos.index', compact('invoice', 'fecha', 'suma'))->with('pagos', $pagos)->render();
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        //return $pdf->download('usuarios.pdf');
+        return $pdf->stream('invoice');
     }
 }

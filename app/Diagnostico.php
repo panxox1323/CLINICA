@@ -41,17 +41,37 @@ class Diagnostico extends Model
 
     }
 
-    public function scopeEspecialista($query, $id_especialista)
+    public function scopeEspecialista($query, $especialista)
     {
-        if(trim($id_especialista) != '' && isset($id_especialista))
+        if(trim($especialista) != '' && isset($especialista))
         {
-            return $query->whereHas('userEspecialista', function($q) use ($id_especialista)
+            return $query->whereHas('userEspecialista', function($q) use ($especialista)
             {
-                $q->where('id', $id_especialista);
+                $q->where('id', $especialista);
             });
 
         }
 
+    }
+
+    public function scopeFecha($query, $fecha)
+    {
+        if(trim($fecha) != "" && isset($fecha))
+        {
+            $query->where('fecha', $fecha);
+        }
+    }
+
+    public function scopePaciente($query, $paciente)
+    {
+        if(trim($paciente) != "" && isset($paciente))
+        {
+            return $query->whereHas('userUsuario', function($q) use ($paciente)
+            {
+                $q->where('id', $paciente);
+            });
+
+        }
     }
 
 }

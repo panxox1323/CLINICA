@@ -2,6 +2,7 @@
 
 namespace Oral_Plus\Http\Requests;
 
+use Illuminate\Routing\Route;
 use Oral_Plus\Http\Requests\Request;
 
 class EditProveedorRequest extends Request
@@ -11,6 +12,8 @@ class EditProveedorRequest extends Request
      *
      * @return bool
      */
+    private $route;
+
     public function __Construct(Route $route)
     {
 
@@ -32,7 +35,7 @@ class EditProveedorRequest extends Request
     {
         return [
 
-            'nombre'           => 'required,'. $this->route->getParameter('proveedores'),
+            'nombre'           => 'required|unique:proveedors,nombre,'. $this->route->getParameter('proveedores'),
             'direccion'        => 'required',
             'telefono'         => 'required',
             'email'            => 'required',

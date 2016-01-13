@@ -13,26 +13,25 @@
                         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
                             <table style="margin-top: 5px;" class="table table-striped table-bordered table-hover">
                                 <tr class="info">
+                                    <th class="text-center">Fecha</th>
                                     <th class="text-center">Hora</th>
                                     <th class="text-center">Paciente</th>
                                     <th class="text-center">Especialista</th>
                                     <th class="text-center">Edad</th>
                                     <th class="text-center">Tel&eacute;fono</th>
-                                    <th class="text-center">Acciones</th>
+
+
 
                                 </tr>
 
                                 @foreach($consultas as $consulta)
                                     <tr data-id="{{ $consulta->id }}">
+                                        <td class="text-center">{!! date('d-m-Y', strtotime($consulta->fecha)) !!}</td>
                                         <td class="text-center">{{date("H:i",$hora=strtotime($consulta->obtenerHora->hora)) }}</td>
                                         <td class="text-center">{!! $consulta->userUsuario->first_name !!} {!! $consulta->userUsuario->last_name !!}</td>
                                         <td class="text-center">{!! $consulta->userEspecialista->first_name !!} {!! $consulta->userEspecialista->last_name !!}</td>
                                         <td class="text-center">{{ \Carbon\Carbon::parse($consulta->userUsuario->fecha_nacimiento)->age }} a&ntilde;os</td>
                                         <td class="text-center">{!! $consulta->userUsuario->telefono !!}</td>
-                                        <td class="text-center">
-                                            <a href="{{ route('admin.consultas.index', $consulta) }}" class="btn btn-success btn-sm" title="Ver Consulta" target=""><span class="icon-next"></span></a>
-
-                                        </td>
 
                                     </tr>
                                 @endforeach

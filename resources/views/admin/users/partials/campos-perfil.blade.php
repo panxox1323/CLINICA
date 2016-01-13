@@ -7,7 +7,19 @@
         <div class="panel-body">
             <div class="container">
                 <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
-                    {!! Form::model($user, ['route' => ['admin.userPerfil.update', $user], 'method' => 'PUT' ]) !!}
+                    @if(Auth::user()->type == 'admin')
+                        {!! Form::model($user, ['route' => ['admin.userPerfil.update', $user], 'method' => 'PUT' ]) !!}
+                    @endif
+                    @if(Auth::user()->type == 'secretaria')
+                        {!! Form::model($user, ['route' => ['secretaria.userPerfil.update', $user], 'method' => 'PUT' ]) !!}
+                    @endif
+                    @if(Auth::user()->type == 'especialista')
+                        {!! Form::model($user, ['route' => ['especialista.userPerfil.update', $user], 'method' => 'PUT' ]) !!}
+                    @endif
+                    @if(Auth::user()->type == 'user')
+                        {!! Form::model($user, ['route' => ['user.userPerfil.update', $user], 'method' => 'PUT' ]) !!}
+                    @endif
+
 
                         @include('admin.users.partials.feildsPerfil')
 
@@ -19,7 +31,7 @@
                 </div>
 
             </div>
-            </div>
         </div>
     </div>
+
 @endsection

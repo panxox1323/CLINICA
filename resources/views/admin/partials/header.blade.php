@@ -43,7 +43,7 @@
                                 <li><a href="{!! route('admin.pdf-usuarios.index') !!}" target="_blank"><span class="icon-user"></span><strong> Usuarios</strong></a></li>
                                 <li><a href="{!! route('admin.pdf-proveedores.index') !!}" target="_blank"><span class="icon-user-tie"><strong> Proveedores</strong> </span></a></li>
                                 <li><a href="" target="_blank"><span class="icon-aid-kit"><strong> Tratamientos</strong></span></a></li>
-                                <li><a href="" target="_blank"><span class="icon-coins"><strong> Pagos por fecha </strong></span></a></li>
+                                <li><a href="{!! route('admin/pagosEfectuados') !!}" target="_blank"><span class="icon-coins"><strong> Pagos por fecha </strong></span></a></li>
                                 <li><a href="" target="_blank"><span class="icon-calendar"><strong> citas </strong></span></a></li>
                             @endif
 
@@ -51,7 +51,7 @@
                                 <li><a href="{!! route('secretaria.pdf-usuarios.index') !!}" target="_blank"><span class="icon-user"></span><strong> Usuarios</strong></a></li>
                                 <li><a href="{!! route('secretaria.pdf-proveedores.index') !!}" target="_blank"><span class="icon-user-tie"><strong> Proveedores</strong> </span></a></li>
                                 <li><a href="{!! route('secretaria/pdf-tratamiento') !!}" target="_blank"><span class="icon-aid-kit"><strong> Tratamientos</strong></span></a></li>
-                                <li><a href="" target="_blank"><span class="icon-coins"><strong> Pagos </strong></span></a></li>
+                                <li><a href="{!! route('secretaria/pagosEfectuados') !!}"><span class="icon-coins"><strong> Pagos </strong></span></a></li>
                                 <li><a href="" target="_blank"><span class="icon-calendar"><strong> citas </strong></span></a></li>
                             @endif
                         </ul>

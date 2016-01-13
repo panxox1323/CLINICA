@@ -23,10 +23,7 @@
                                 @if(Auth::user()->type == 'admin')
                                     {!! Form::model(Request::all(),['route' => 'horas-agendadas', 'method' => 'GET' , 'class' => 'navbar-form navbar-right', 'role' => 'search']) !!}
                                         <div class="form-group">
-
-                                            {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Nombre de usuario']) !!}
-                                            <strong><span class="icon-circle-with-plus"></span></strong>
-
+                                            <input type="date" name="fecha" id="datepicker100">
                                         </div>
 
                                         <button type="submit" class="btn btn-info"><span class="icon-magnifier"></span></span> <strong>Buscar</strong></button>
@@ -36,8 +33,7 @@
                                 @if(Auth::user()->type == 'secretaria')
                                     {!! Form::model(Request::all(),['route' => 'secretaria/horas-agendadas', 'method' => 'GET' , 'class' => 'navbar-form navbar-right', 'role' => 'search']) !!}
                                         <div class="form-group">
-                                            {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Nombre de usuario']) !!}
-                                            <strong><span class="icon-circle-with-plus"></span></strong>
+                                            <input type="date" name="fecha" id="datepicker100">
                                         </div>
                                         <button type="submit" class="btn btn-info"><span class="icon-magnifier"></span></span> <strong>Buscar</strong></button>
                                     {!! Form::close() !!}
@@ -46,8 +42,7 @@
                                 @if(Auth::user()->type == 'user')
                                     {!! Form::model(Request::all(),['route' => 'user/horas-agendadasUser', 'method' => 'GET' , 'class' => 'navbar-form navbar-right', 'role' => 'search'], Auth::user()->id) !!}
                                     <div class="form-group">
-                                        {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Nombre de usuario']) !!}
-                                        <strong><span class="icon-circle-with-plus"></span></strong>
+                                        <input type="date" name="fecha" id="datepicker100">
                                     </div>
                                     <button type="submit" class="btn btn-info"><span class="icon-magnifier"></span></span> <strong>Buscar</strong></button>
                                     {!! Form::close() !!}

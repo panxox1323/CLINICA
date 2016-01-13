@@ -187,6 +187,7 @@
 					closeText: "Cerrar",
 					buttonText: "Seleciona una fecha",
 					daysOfWeekDisabled: [0, 6],
+					dateFormat: "yy-mm-dd",
 
 
 				}

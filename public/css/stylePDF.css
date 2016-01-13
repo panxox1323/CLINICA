@@ -26,6 +26,15 @@
 
 }
 
+.total
+{
+  font-weight: bold;
+  margin-left: 500px;
+  border: 1px solid blue;
+  padding: 0 -35px 0 35px ;
+  background-color: #D1D1D9;
+}
+
 .color-cabecera-tabla
 {
   background-color: blue;
@@ -70,7 +79,7 @@
   float: right; }
 
 .titulo{
-  color: blue;
+  color: #171761;
   text-align: center;
   margin-bottom: 30px;
   font-size: 30px;

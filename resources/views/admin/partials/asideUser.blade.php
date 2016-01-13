@@ -13,7 +13,7 @@
                 </a>
                 <ul class="treeview-menu" style="display: none;">
                     <li class="icono"><a href="{{ route('user.agendar.index') }}"><span class="icon-chevron-thin-right"></span> Agendar Cita</a></li>
-                    <li class="icono"><a href="{!! route('user/horas-agendadasUser', Auth::user()) !!}"><span class="icon-chevron-thin-right"></span> Horas Agendadas</a></li>
+                    <li class="icono"><a href="{!! route('user/horas-agendadasUser') !!}"><span class="icon-chevron-thin-right"></span> Horas Agendadas</a></li>
                 </ul>
             </li>
 
@@ -22,7 +22,7 @@
                     <span class="icon-health"> Diagnósticos</span>
                 </a>
                 <ul class="treeview-menu" style="display: none;">
-                    <li class="icono"><a href="{!! route('user/diagnosticosUser', Auth::user())!!}"><span class="icon-chevron-thin-right"></span> Ir a Diagnósticos</a></li>
+                    <li class="icono"><a href="{!! route('user/diagnosticosUser')!!}"><span class="icon-chevron-thin-right"></span> Ir a Diagnósticos</a></li>
                     <li class="icono"><a href="{!! route('user.diagnostico.create')!!}"><span class="icon-plus"></span> Ingresar Diagnóstico</a></li>
                 </ul>
             </li>
@@ -32,7 +32,7 @@
                     <span class="icon-moneybag"> Pagos</span>
                 </a>
                 <ul class="treeview-menu" style="display: none;">
-                    <li class="icono"><a href="{!! route('user/pagosUser', Auth::user())!!}"><span class="icon-chevron-thin-right"></span> Ir a Pagos</a></li>
+                    <li class="icono"><a href="{!! route('user/pagosUser')!!}"><span class="icon-chevron-thin-right"></span> Ir a Pagos</a></li>
                 </ul>
             </li>
 

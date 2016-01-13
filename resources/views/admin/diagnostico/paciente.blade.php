@@ -19,9 +19,15 @@
                         <div class="col-md-7 col-sm-12 col-xs-12 col-md-offset-2 ">
                             {!! Form::model(Request::all(),['route' => 'user/diagnosticosUser', 'method' => 'GET' , 'class' => 'navbar-form navbar-right', 'role' => 'search']) !!}
                             <div class="form-group">
-                                {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Nombre de usuario']) !!}
-                                <strong><span class="icon-circle-with-plus"></span></strong>
+                                <select name="especialista" class="form-control">
+                                    <option value="">Seleccione Especialista</option>
+                                    @foreach($especialistas as $esp)
+                                        <option value="{{ $esp->id }}" >{{ $esp->first_name.' '.$esp->last_name }}</option>
+                                    @endforeach
+                                </select>
 
+                                <strong><span class="icon-circle-with-plus"></span></strong>
+                                <input type="date" id="datepicker100" name="fecha">
                                 <button type="submit" class="btn btn-info"><span class="icon-magnifier"></span><strong>Buscar</strong></button>
                                 {!! Form::close() !!}
                             </div>

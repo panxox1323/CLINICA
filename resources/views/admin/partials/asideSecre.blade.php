@@ -77,7 +77,7 @@
                     <li class="icono {{ Active::pattern('secretaria/insumos/create') }}"><a href="{!! route('secretaria.insumos.create') !!}"><span class="icon-circle-with-plus"></span> Crear Insumo</a></li>
                 </ul>
             </li>
-            <li class="{{ Active::pattern("secretaria/pedidos") }} prueba treeview">
+            <li class="{{ Active::pattern("secretaria/pedido") }} prueba treeview">
                 <a href="#">
                     <span class="icon-briefcase"> Pedidos</span>
                 </a>

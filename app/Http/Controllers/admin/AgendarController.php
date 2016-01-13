@@ -221,7 +221,7 @@ class AgendarController extends Controller
 
     public function ver_horas(Request $request)
     {
-        $horas = Horas_agendadas::name($request->get('name'))
+        $horas = Horas_agendadas::name($request->get('name'))->fecha($request->get('fecha'))
                     ->groupBy('fecha', 'id_horas')
                     ->orderBy('fecha', 'desc')
                     ->paginate(8);
@@ -239,9 +239,11 @@ class AgendarController extends Controller
         return view('admin.citas.edit', compact('listado', 'especialista', 'paciente', 'disponibles'));
     }
 
-    public function horasUser($id)
+    public function horasUser(Request $request)
     {
-        $horas = Horas_agendadas::where('id_usuario', $id)->orderBy('fecha', 'asc')->paginate(8);
+        $id = Auth::user()->id;
+
+        $horas = Horas_agendadas::fecha($request->get('fecha'))->where('id_usuario', $id)->orderBy('fecha', 'asc')->paginate(8);
 
         return view('admin.citas.citasUser', compact('horas'));
     }

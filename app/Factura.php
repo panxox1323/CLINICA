@@ -32,7 +32,7 @@ class Factura extends Model
     {
         if(trim($name) != "" && isset($name))
         {
-            $query->where('numero_factura',"LIKE", "%$name%");
+            $query->where('numero_factura', $name);
         }
 
     }

@@ -21,16 +21,24 @@ class Pedidos extends Model
         return $this->hasMany('Oral_Plus\DetallePedido');
     }
 
-    public function scopeObtenerProveedor($query, $proveedor)
+    public function scopeConsulta($query, $proveedor)
     {
-        if(trim($proveedor) != "")
+        if(trim($proveedor) != "" && isset($proveedor))
         {
             return $query->whereHas('proveedor', function($q) use ($proveedor)
             {
-                $q->where('nombre', "LIKE", "%$proveedor%");
+                $q->where('id', $proveedor);
             });
 
 
+        }
+    }
+
+    public function scopeFecha($query, $fecha)
+    {
+        if(trim($fecha) != "" && isset($fecha))
+        {
+            $query->where('fecha', $fecha);
         }
     }
 

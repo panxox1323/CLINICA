@@ -32,11 +32,18 @@
                             @endif
                             <div class="form-group">
 
-                                {!! Form::text('proveedor', null, ['class' => 'form-control', 'placeholder' => 'Nombre Proveedor']) !!}
+                                <select name="proveedor" class="form-control">
+                                    <option value="">Selecione Proveedor</option>
+                                    @foreach($proveedores as $proveedor)
+                                        <option value="{{ $proveedor->id }}" >{{ $proveedor->nombre }} </option>
+                                    @endforeach
+                                </select>
+                                <strong><span class="icon-circle-with-plus"></span></strong>
+                                <input type="date" name="fecha" id="datepicker100">
 
                             </div>
 
-                            <button type="submit" class="btn btn-info"><span class="icon-magnifier"></span></span> <strong>Buscar</strong></button>
+                            <button type="submit" class="btn btn-info"><span class="icon-magnifier"></span> <strong>Buscar</strong></button>
                             {!! Form::close() !!}
                         </div>
                     </div>

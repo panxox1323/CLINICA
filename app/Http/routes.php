@@ -84,7 +84,7 @@ Route::group(['prefix' => 'especialista', 'middleware' => ['auth'], 'namespace' 
 //Rutas Paciente
 Route::group(['prefix' => 'user', 'middleware' => ['auth', 'IsUser'], 'namespace' => '\Admin'], function (){
 
-    Route::get('/', 'UserController@ingresar');
+    Route::get('/', 'UserController@misCitas');
 
     Route::get('ver-historial/{id}',
         [
@@ -92,13 +92,13 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'IsUser'], 'namespace
             'uses' => 'UsersController@verHistorial'
         ]);
 
-    Route::get('pagosUser/{id}',
+    Route::get('pagosUser',
         [
             'as'   => 'user/pagosUser',
             'uses' => 'pagosUserController@index'
         ]);
 
-    Route::get('diagnosticosUser/{id}',
+    Route::get('diagnosticosUser',
         [
             'as'   => 'user/diagnosticosUser',
             'uses' => 'DiagnosticoController@paciente'
@@ -114,7 +114,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'IsUser'], 'namespace
     Route::get('editarPerfil'  ,     'UsersController@editarPerfil');
     Route::resource('userPerfil',    'UserPerfilController');
 
-    Route::get('horas-agendadasUser/{id}', [
+    Route::get('horas-agendadasUser', [
         'as'     => 'user/horas-agendadasUser',
         'uses'   => 'AgendarController@horasUser'
     ]);
@@ -150,6 +150,11 @@ Route::group(['prefix' => 'secretaria', 'middleware' => ['auth', 'IsSecretaria']
     Route::get('reportePago/{id}',[
         'as'    => 'secretaria/reportePago',
         'uses'  => 'PagarController@reporte'
+    ]);
+
+    Route::get('pagosEfectuados', [
+        'as'    => 'secretaria/pagosEfectuados',
+        'uses'  => 'pagosController@pagosEfectuados'
     ]);
 
     Route::get('ver-historial/{id}',
@@ -235,6 +240,12 @@ Route::group(['prefix' => 'secretaria', 'middleware' => ['auth', 'IsSecretaria']
 
     );
 
+    Route::get('reporte-pagos',
+        [
+            'as'   => 'secretaria/reporte-pagos',
+            'uses' => 'pagosController@reportePagos'
+        ]);
+
     Route::post('/pagado/{id}', [
 
         'as'      => 'pagado',
@@ -271,6 +282,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'IsAdmin'], 'namespa
             'uses' => 'UsersController@verHistorial'
         ]);
 
+    Route::get('reporte-pagos',
+        [
+            'as'   => 'admin/reporte-pagos',
+            'uses' => 'pagosController@reportePagos'
+        ]);
+
     Route::get('reportePago/{id}',[
         'as'    => 'admin/reportePago',
         'uses'  => 'PagarController@reporte'
@@ -288,6 +305,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'IsAdmin'], 'namespa
         'as'    => 'cambiar-estado',
         'uses'  => 'DiagnosticoController@cambiarEstado'
     ]);
+
+    Route::get('pagosEfectuados', [
+        'as'    => 'admin/pagosEfectuados',
+        'uses'  => 'pagosController@pagosEfectuados'
+    ]);
+
 
 
     Route::resource('pdf-usuarios', 'PdfController');

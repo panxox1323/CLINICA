@@ -16,6 +16,7 @@ use Oral_Plus\Http\Controllers\Controller;
 use Illuminate\Routing\Route;
 use Oral_Plus\Http\Requests\CreateUserRequest;
 use Oral_Plus\Http\Requests\EditUserRequest;
+use Oral_Plus\Tipos;
 use Oral_Plus\User;
 use Redirect;
 

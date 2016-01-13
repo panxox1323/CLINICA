@@ -16,13 +16,11 @@
             <td class="text-center">{{ date("H:i",$hora3=strtotime($hora->obtenerHora->hora)) }}</td>
             <td class="text-center">{{ $hora->userUsuario->first_name }} {{ $hora->userUsuario->last_name }}</td>
             <td class="text-center">{{ $hora->userEspecialista->first_name }} {{ $hora->userEspecialista->last_name }}</td>
-            <td class="text-center">
-
-                @if(Auth::user()->type == 'admin' || Auth::user()->type == 'secretaria')
+            @if(Auth::user()->type == 'admin' || Auth::user()->type == 'secretaria')
+                <td class="text-center">
                     <a href="#!" class="btn btn-danger btn-delete btn-xs" type="submit" title="Eliminar Cita" target=""><span class="icon-cancel"></span></a>
-                @endif
-
-            </td>
+                 </td>
+            @endif
         </tr>
     @endforeach
 </table>

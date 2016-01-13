@@ -87,7 +87,7 @@ class InsumosController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update(EditInsumoRequest $request, $id)
+    public function update(Requests\EditInsumoRequest $request, $id)
     {
         $insumo = Insumo::findOrFail($id);
         $insumo->fill($request->all());
